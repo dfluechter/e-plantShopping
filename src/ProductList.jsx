@@ -304,7 +304,7 @@ function ProductList({ onHomeClick }) {
                                     disabled={addedToCart[plant.name]}
                                     style={{ backgroundColor: addedToCart[plant.name] ? 'gray' : '#4CAF50', color: 'white' }}
                                 >
-                                {addedToCart[plant.name] ? 'Hinzugefügt' : 'In den Warenkorb'}
+            {addedToCart[plant.name] ? 'Hinzugefügt' : 'In den Warenkorb'}
           </button>
         </div>
       ))}
