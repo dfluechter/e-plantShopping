@@ -1,8 +1,8 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
+// 👉 Hier den Repo-Namen einfügen
 export default defineConfig({
-  base: "/shoppingreact",
+  base: '/DEIN_REPO_NAME/',  // Beispiel: '/paradise-nursery/'
   plugins: [react()],
-})
+});
