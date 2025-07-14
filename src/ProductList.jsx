@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
+
+import { useDispatch } from 'react-redux';
+import { addItem } from './CartSlice';
+
+
 function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
@@ -252,6 +257,16 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
+
+    const [addedToCart, setAddedToCart] = useState({});
+    
+    const dispatch = useDispatch();
+
+    const handleAddToCart = (plant) => {
+      dispatch(addItem(plant)); // Plant-Objekt an Redux senden
+      setAddedToCart(prev => ({ ...prev, [plant.name]: true }));
+    };
+    
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -274,6 +289,28 @@ function ProductList({ onHomeClick }) {
             </div>
             {!showCart ? (
                 <div className="product-grid">
+                    {plantsArray.map((categoryObj, idx) => (
+                        <div key={idx}>
+                        <h2 style={{ margin: '20px 0' }}>{categoryObj.category}</h2>
+                        <div className="category-grid">
+                            {categoryObj.plants.map((plant, index) => (
+                                <div key={index} className="plant-card">
+                                <img src={plant.image} alt={plant.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+                                <h3>{plant.name}</h3>
+                                <p>{plant.description}</p>
+                                <p><strong>{plant.cost}</strong></p>
+                                <button
+                                    onClick={() => handleAddToCart(plant)}
+                                    disabled={addedToCart[plant.name]}
+                                    style={{ backgroundColor: addedToCart[plant.name] ? 'gray' : '#4CAF50', color: 'white' }}
+                                >
+                                {addedToCart[plant.name] ? 'Hinzugefügt' : 'In den Warenkorb'}
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+))}
 
 
                 </div>
